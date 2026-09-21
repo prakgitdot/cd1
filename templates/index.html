@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Notes — Crop Recommendation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="page">
+
+    <section class="hero">
+      <p class="plot-line">N · P · K · °C · % · pH · mm</p>
+      <h1>Field Notes</h1>
+      <p class="hero-copy">
+        Enter the soil and weather readings from your plot. The model
+        compares them against growing conditions for twenty-two crops
+        and tells you which one fits best.
+      </p>
+    </section>
+
+    <section class="panel" id="form-panel">
+      <form id="crop-form">
+        <div class="field-grid">
+          <div class="field">
+            <label for="N">Nitrogen (N)</label>
+            <input type="number" step="any" id="N" name="N" placeholder="e.g. 90" required>
+            <span class="unit">kg/ha</span>
+          </div>
+          <div class="field">
+            <label for="P">Phosphorus (P)</label>
+            <input type="number" step="any" id="P" name="P" placeholder="e.g. 42" required>
+            <span class="unit">kg/ha</span>
+          </div>
+          <div class="field">
+            <label for="K">Potassium (K)</label>
+            <input type="number" step="any" id="K" name="K" placeholder="e.g. 43" required>
+            <span class="unit">kg/ha</span>
+          </div>
+          <div class="field">
+            <label for="temperature">Temperature</label>
+            <input type="number" step="any" id="temperature" name="temperature" placeholder="e.g. 26.5" required>
+            <span class="unit">°C</span>
+          </div>
+          <div class="field">
+            <label for="humidity">Humidity</label>
+            <input type="number" step="any" id="humidity" name="humidity" placeholder="e.g. 80" required>
+            <span class="unit">%</span>
+          </div>
+          <div class="field">
+            <label for="ph">Soil pH</label>
+            <input type="number" step="any" id="ph" name="ph" placeholder="e.g. 6.5" required>
+            <span class="unit">pH</span>
+          </div>
+          <div class="field field-wide">
+            <label for="rainfall">Rainfall</label>
+            <input type="number" step="any" id="rainfall" name="rainfall" placeholder="e.g. 200" required>
+            <span class="unit">mm</span>
+          </div>
+        </div>
+
+        <button type="submit" id="submit-btn">Recommend a crop</button>
+      </form>
+
+      <div id="result-area" class="result-area" hidden>
+        <div class="result-main">
+          <span class="result-label">Best match for this plot</span>
+          <span id="result-crop" class="result-crop"></span>
+        </div>
+        <div class="result-alts">
+          <span class="result-label">Other close matches</span>
+          <ul id="result-alts-list"></ul>
+        </div>
+      </div>
+
+      <div id="error-area" class="error-area" hidden></div>
+    </section>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
